@@ -1,0 +1,13 @@
+.country-button {
+  padding: 0.5rem 1rem;
+  border: none;
+  color: #1a202c;
+  border-radius: 0.2rem;
+  cursor: pointer;
+
+  &.selected {
+    background-color: #5395ff;
+    color: white;
+    font-weight: bold;
+  }
+}

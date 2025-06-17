@@ -1,0 +1,29 @@
+<div
+  class="w-full min-h-screen flex flex-col sm:flex-row items-center sm:items-stretch justify-center sm:justify-start"
+>
+  <aside
+    class="w-full sm:w-64 bg-gray-100 dark:bg-gray-800 p-6 flex flex-col gap-4"
+  >
+    <h1 class="text-2xl font-bold text-gray-800 dark:text-white">Dashboard</h1>
+    <nav class="flex flex-col gap-2 mt-4">
+      <a
+        [routerLink]="['./weather']"
+        routerLinkActive="text-blue-600 font-semibold underline underline-offset-8"
+        class="text-gray-600 dark:text-gray-300 hover:text-blue-500 hover:underline text-md"
+      >
+        WEATHER
+      </a>
+      <a
+        [routerLink]="['./users']"
+        [routerLinkActiveOptions]="{ exact: true }"
+        routerLinkActive="text-blue-600 font-semibold underline underline-offset-8"
+        class="text-gray-600 dark:text-gray-300 hover:text-blue-500 hover:underline text-md"
+      >
+        USERS
+      </a>
+    </nav>
+  </aside>
+  <main class="flex-1 p-8">
+    <router-outlet></router-outlet>
+  </main>
+</div>

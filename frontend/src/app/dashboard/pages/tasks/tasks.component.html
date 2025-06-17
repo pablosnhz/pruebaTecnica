@@ -1,0 +1,49 @@
+<p class="text-2xl mb-6 mt-10">Tareas</p>
+
+<div class="mb-3 px-3">
+  <p class="text-xl font-semibold">Nueva tarea</p>
+  <div class="flex">
+    <input
+      type="text"
+      [(ngModel)]="newTaskTitle"
+      placeholder="Escribe una tarea"
+      class="border px-2 py-1 mr-2 rounded"
+    />
+    <button
+      (click)="createTask()"
+      class="bg-blue-500 text-white px-4 py-1 rounded"
+    >
+      Agregar
+    </button>
+  </div>
+</div>
+<div
+  class="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4"
+>
+  <div
+    *ngFor="let item of dataTasks"
+    class="p-4 border rounded-lg shadow-xl bg-white"
+  >
+    <p class="text-xl font-semibold mb-2">Tarea #{{ item.id }}</p>
+
+    <p class="mb-2"><strong>Título:</strong> {{ item.titulo }}</p>
+
+    <p class="mb-2">
+      <strong>Completada?</strong> {{ item.completada ? "Sí" : "No" }}
+    </p>
+
+    <button
+      (click)="toggleComplete(item)"
+      class="bg-yellow-500 text-white px-2 py-1 rounded mr-2"
+    >
+      {{ item.completada ? "Marcar como pendiente" : "Marcar como completada" }}
+    </button>
+
+    <button
+      (click)="deleteTask(item.id)"
+      class="bg-red-600 text-white px-3 py-1 rounded"
+    >
+      X
+    </button>
+  </div>
+</div>

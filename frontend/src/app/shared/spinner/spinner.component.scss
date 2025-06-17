@@ -1,0 +1,16 @@
+.logo-effect {
+  animation: logoFgo 2s infinite;
+}
+
+@keyframes logoFgo {
+  0%,
+  100% {
+    filter: drop-shadow(0 0 10px #6986c4be);
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    filter: drop-shadow(0 0 5px #3289cc68);
+    opacity: 0.7;
+  }
+}

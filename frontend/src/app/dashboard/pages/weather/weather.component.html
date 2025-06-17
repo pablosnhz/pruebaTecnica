@@ -1,0 +1,92 @@
+<p class="text-2xl mb-6">Weather API</p>
+
+<!-- <p>{{ weatherData | json }}</p> -->
+
+<div
+  class="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4"
+>
+  <div class="p-4 border rounded-lg shadow-xl">
+    <div class="mb-3 px-3">
+      <p class="text-xl font-semibold">País</p>
+      <hr class="border-t border-gray-300 my-2" />
+    </div>
+    <div class="px-3 flex flex-col gap-2">
+      <div *ngFor="let country of ciudadSeleccionada | keyvalue">
+        <button
+          (click)="onSelectCountry(country.key)"
+          [class.selected]="country.key === selectedCountry"
+          class="country-button"
+        >
+          {{ country.key }}
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="p-4 border rounded-lg shadow-xl">
+    <div class="mb-3 px-3">
+      <p class="text-xl font-semibold">País Seleccionado</p>
+      <hr class="border-t border-gray-300 my-2" />
+    </div>
+    <div class="px-3 flex flex-col gap-2">
+      <p><strong>País: </strong> {{ selectedCountry }}</p>
+      <p><strong>Ciudad: </strong>{{ selectedCity }}</p>
+    </div>
+  </div>
+
+  <div class="p-4 border rounded-lg shadow-xl">
+    <div class="mb-3 px-3">
+      <p class="text-xl font-semibold">Clima Actual</p>
+      <hr class="border-t border-gray-300 my-2" />
+    </div>
+    <div class="px-3 flex items-center gap-4">
+      <div *ngIf="weatherData" class="flex items-center gap-4">
+        <img
+          [src]="weatherData.current.condition.icon"
+          alt="weather-icon"
+          class="w-16 h-16"
+        />
+        <div class="flex flex-col gap-1">
+          <p>
+            <strong>Temperatura:</strong> {{ weatherData.current.temp_c }}°C
+          </p>
+          <p>
+            <strong>Condición:</strong> {{ weatherData.current.condition.text }}
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="p-4 border rounded-lg shadow-xl">
+    <div class="mb-3 px-3">
+      <p class="text-xl font-semibold">Hora Local</p>
+      <hr class="border-t border-gray-300 my-2" />
+    </div>
+    <div class="px-3 flex flex-col gap-2">
+      <div *ngIf="weatherData">
+        <p>
+          <strong>Hora actual: </strong
+          >{{ weatherData.location.localtime | date : "HH:mm:ss" }}
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <div class="p-4 border rounded-lg shadow-xl">
+    <div class="mb-3 px-3">
+      <p class="text-xl font-semibold">Ciudades</p>
+      <hr class="border-t border-gray-300 my-2" />
+    </div>
+    <div class="px-3 flex flex-col gap-2">
+      <div *ngFor="let city of cities">
+        <button (click)="onSelectCity(city)">
+          {{ city }}
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Componente para mis tareas, a modo de ejemplo reutilizando componente -->
+<app-tasks></app-tasks>

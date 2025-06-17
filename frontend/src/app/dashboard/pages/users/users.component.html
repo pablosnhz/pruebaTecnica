@@ -1,0 +1,50 @@
+<p class="text-2xl mb-6">Usuarios</p>
+
+<div class="relative overflow-x-auto justify-center items-center flex">
+  <div class="rounded-lg shadow-xl overflow-hidden border">
+    <div class="flex items-center justify-between">
+      <button
+        (click)="exportCSV()"
+        class="text-white rounded-md bg-green-600 border border-black p-2 px-2"
+      >
+        Dowload Excel
+      </button>
+      <input
+        [formControl]="searchControl"
+        type="text"
+        id="search"
+        class="bg-white rounded-md border border-black p-2 px-2 text-gray-900"
+        placeholder="Busqueda por name"
+      />
+    </div>
+    <table
+      *ngIf="data"
+      class="text-sm text-left rounded-lg rtl:text-right text-dark border shadow-xl"
+    >
+      <thead class="text-xs text-dark uppercase">
+        <tr class="border-b text-dark dark:border-gray-300">
+          <th scope="col" class="px-10 py-3">Nombre</th>
+          <th scope="col" class="px-10 py-3">Email</th>
+          <th scope="col" class="px-10 py-3">Fecha de registro</th>
+          <th scope="col" class="px-10 py-3">Ultimo login</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr
+          *ngFor="let user of data"
+          class="border-b text-dark dark:border-gray-300"
+        >
+          <td class="px-10 py-4">{{ user.namelast }}</td>
+          <td class="px-10 py-4">{{ user.email }}</td>
+          <td class="px-10 py-4">
+            {{ user.ultimo_login | date : "dd/MM/yyyy HH:mm:ss" }}
+          </td>
+          <td class="px-10 py-4">
+            {{ user.ultimo_logout | date : "dd/MM/yyyy HH:mm:ss" }}
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

@@ -1,0 +1,111 @@
+<div class="min-h-screen flex items-center justify-center bg-[#f8fafd] px-4">
+  <div
+    class="max-w-lg w-full mx-auto bg-white dark:bg-[#ffffff] rounded-xl shadow-2xl py-10 px-14 flex flex-col"
+  >
+    <h1 class="text-xl font-bold text-black dark:text-dark mb-8 mt-5">
+      Crear cuenta
+    </h1>
+    <form
+      [formGroup]="form"
+      (ngSubmit)="submitRegister()"
+      class="w-full flex flex-col gap-4"
+    >
+      <div class="flex items-start flex-col justify-start">
+        <label for="email" class="text-sm text-gray-700 dark:text-dark mr-2"
+          >Nombre y Apellido
+        </label>
+        <input
+          type="text"
+          id="nameLast"
+          name="nameLast"
+          formControlName="nameLast"
+          placeholder="Ingresa tu nombre completo"
+          class="w-full px-3 dark:bg-white py-2 rounded-md border border-gray-300 dark:border-gray-700 focus:outline-none focus:ring-1 focus:ring-blue-500"
+        />
+        <div
+          *ngIf="form.get('nameLast')?.touched && form.get('nameLast')?.errors?.['minlength'] && form.get('nameLast')?.errors?.['minlength']"
+          class="text-red-500 text-sm"
+        >
+          El Nombre debe tener al menos 13 caracteres.
+        </div>
+      </div>
+
+      <div class="flex flex-col sm:flex-row gap-4">
+        <div class="flex items-start flex-col justify-start">
+          <label
+            for="password"
+            class="text-sm text-gray-700 dark:text-dark mr-2"
+            >Password:</label
+          >
+          <input
+            type="password"
+            id="password"
+            name="password"
+            formControlName="password"
+            autocomplete="current-password"
+            placeholder="Password"
+            class="w-full px-3 dark:bg-white py-2 rounded-md border border-gray-300 dark:border-gray-700"
+          />
+        </div>
+
+        <div class="flex items-start flex-col justify-start">
+          <label
+            for="password"
+            class="text-sm text-gray-700 dark:text-dark mr-2"
+            >Confirm Password:</label
+          >
+          <input
+            type="password"
+            id="confirmPassword"
+            name="confirmPassword"
+            formControlName="confirmPassword"
+            autocomplete="current-password"
+            placeholder="Confirm password"
+            class="w-full px-3 dark:bg-white py-2 rounded-md border border-gray-300 dark:border-gray-700"
+          />
+        </div>
+      </div>
+      <div
+        *ngIf="form.errors?.['passwordMismatch'] && form.dirty"
+        class="text-red-500 text-sm"
+      >
+        Las contraseñas no coinciden
+      </div>
+
+      <div class="flex items-start flex-col justify-start">
+        <label for="email" class="text-sm text-gray-700 dark:text-dark mr-2"
+          >Email</label
+        >
+        <input
+          type="text"
+          id="email"
+          name="email"
+          formControlName="email"
+          autocomplete="username"
+          placeholder="Email"
+          class="w-full px-3 dark:bg-white py-2 rounded-md border border-gray-300 dark:border-gray-700"
+        />
+        <div
+          *ngIf="form.get('email')?.touched && form.get('email')?.errors"
+          class="text-red-500 text-sm"
+        >
+          Este campo debe ser un correo valido
+        </div>
+      </div>
+      <button
+        type="submit"
+        class="bg-[#006eff] hover:bg-blue-600 text-white font-medium py-2 px-4 mt-6 rounded-md shadow-sm"
+      >
+        Registrarse
+      </button>
+      <div *ngIf="errorMessage" class="text-danger text-sm mt-1">
+        {{ errorMessage }}
+      </div>
+    </form>
+
+    <div class="mt-4 text-center">
+      <span class="text-sm text-dark">Ya tienes una cuenta? </span>
+      <a routerLink="/login" class="text-[#006eff]">Iniciar Sesión</a>
+    </div>
+  </div>
+</div>
