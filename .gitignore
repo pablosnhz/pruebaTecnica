@@ -1,0 +1,23 @@
+# node
+node_modules/
+.env
+dist/
+build/
+
+# logs
+*.log
+
+# angular
+frontend/.angular/cache/
+frontend/.angular/
+frontend/dist/
+frontend/.env
+
+# ides
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# git
+.git/
