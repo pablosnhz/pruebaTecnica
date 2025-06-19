@@ -28,3 +28,5 @@ app.get("/check-db", async (req, res) => {
     res.status(500).send("Error verificando base de datos");
   }
 });
+
+app.get("/", (req, res) => res.send("hola mundo"));
