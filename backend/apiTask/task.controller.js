@@ -30,11 +30,11 @@ const createTask = async (req, res) => {
 // toggle para la task
 const updateTask = async (req, res) => {
   const { id } = req.params;
-  const { completed } = req.body;
+  const { completada } = req.body;
   try {
     const result = await pool.query(
-      "UPDATE tasks SET completed = $1 WHERE id = $2 RETURNING *",
-      [completed, id]
+      "UPDATE tasks SET completada = $1 WHERE id = $2 RETURNING *",
+      [completada, id]
     );
     res.json(result.rows[0]);
   } catch (err) {
