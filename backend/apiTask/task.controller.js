@@ -27,6 +27,22 @@ const createTask = async (req, res) => {
   }
 };
 
+// toggle para la task
+const updateTask = async (req, res) => {
+  const { id } = req.params;
+  const { completed } = req.body;
+  try {
+    const result = await pool.query(
+      "UPDATE tasks SET completed = $1 WHERE id = $2 RETURNING *",
+      [completed, id]
+    );
+    res.json(result.rows[0]);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: "Error al actualizar tarea" });
+  }
+};
+
 // delete por el id
 const deleteTask = async (req, res) => {
   const { id } = req.params;
@@ -43,5 +59,6 @@ const deleteTask = async (req, res) => {
 module.exports = {
   getTasks,
   createTask,
+  updateTask,
   deleteTask,
 };
