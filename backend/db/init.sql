@@ -1,0 +1,14 @@
+CREATE TABLE IF NOT EXISTS tasks (
+  id SERIAL PRIMARY KEY,
+  titulo TEXT NOT NULL,
+  completada BOOLEAN DEFAULT false
+);
+
+CREATE TABLE IF NOT EXISTS users (
+  id SERIAL PRIMARY KEY,
+  nameLast VARCHAR(100) NOT NULL,
+  email VARCHAR(100) UNIQUE NOT NULL,
+  password TEXT NOT NULL,
+  ultimo_login TIMESTAMP,
+  ultimo_logout TIMESTAMP
+);
