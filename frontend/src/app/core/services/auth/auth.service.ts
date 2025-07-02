@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, signal, WritableSignal } from '@angular/core';
 import { Router } from '@angular/router';
-import { Observable } from 'rxjs';
+import { finalize, Observable } from 'rxjs';
 import { tap } from 'rxjs/internal/operators/tap';
 import { environment } from 'src/environments/environment.development';
 
@@ -10,6 +10,7 @@ import { environment } from 'src/environments/environment.development';
 })
 export class AuthService {
   $user: WritableSignal<any> = signal(null);
+  $loading: WritableSignal<boolean> = signal(false);
 
   constructor(private http: HttpClient, private router: Router) {
     this.restoreUser();
@@ -20,6 +21,7 @@ export class AuthService {
   }
 
   login(email: string, password: string) {
+    this.$loading.set(true);
     return this.http
       .post(`${environment.authApi}/login`, { email, password })
       .pipe(
@@ -27,7 +29,8 @@ export class AuthService {
           if (response.user) {
             this.$user.set(response.user);
           }
-        })
+        }),
+        finalize(() => this.$loading.set(false))
       );
   }
 
@@ -37,7 +40,10 @@ export class AuthService {
     password: string;
     confirmPassword: string;
   }) {
-    return this.http.post(`${environment.authApi}/register`, user);
+    this.$loading.set(true);
+    return this.http
+      .post(`${environment.authApi}/register`, user)
+      .pipe(finalize(() => this.$loading.set(false)));
   }
 
   // recuperamos el token para que persista

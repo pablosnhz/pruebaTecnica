@@ -2,12 +2,6 @@
   <div
     class="max-w-lg w-full mx-auto bg-white dark:bg-[#ffffff] rounded-xl shadow-2xl py-10 px-14 flex flex-col items-center"
   >
-    <img
-      src="./../../../../assets/logo_farmaGo.webp"
-      alt="logo"
-      class="w-40 h-20"
-      loading="lazy"
-    />
     <h1
       class="text-xl font-bold text-center text-black dark:text-dark mb-8 mt-5"
     >
@@ -56,13 +50,22 @@
 
       <button
         type="submit"
-        class="bg-blue-600 hover:bg-blue-900 text-white font-medium py-2 px-4 mt-6 rounded-md shadow-sm"
+        class="rounded-mt-3 bg-[#006eff] hover:bg-blue-600 text-white font-medium py-2 px-4 mt-6 rounded-md shadow-sm"
+        *ngIf="!$loading(); else loadingContent"
       >
         Acceder
       </button>
       <div *ngIf="errorMensaje" class="text-red-500 text-sm mt-1">
         {{ errorMensaje }}
       </div>
+
+      <ng-template #loadingContent>
+        <button
+          class="hover:text-[#000000] rounded-mt-3 bg-[#FFFFFF] rounded-lg text-sm px-6 py-2.5 mb-2"
+        >
+          <app-spinner></app-spinner>
+        </button>
+      </ng-template>
     </form>
 
     <div class="mt-4 text-center">
@@ -71,5 +74,13 @@
         >Registrate</a
       >
     </div>
+
+    <button
+      type="button"
+      (click)="accederComoInvitado()"
+      class="bg-green-500 hover:bg-green-900 text-white font-medium py-2 px-4 mt-6 rounded-md shadow-sm"
+    >
+      Acceder como invitado
+    </button>
   </div>
 </div>

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Signal } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/core/services/auth/auth.service';
@@ -10,6 +10,7 @@ import { AuthService } from 'src/app/core/services/auth/auth.service';
 })
 export class RegisterComponent {
   errorMessage = '';
+  $loading: Signal<boolean> = this.authService.$loading;
 
   form: FormGroup;
 

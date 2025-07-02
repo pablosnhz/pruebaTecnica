@@ -25,6 +25,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     DashboardRoutingModule,
     FormsModule,
     ReactiveFormsModule,
+    SharedModule,
   ],
 })
 export class DashboardModule {}

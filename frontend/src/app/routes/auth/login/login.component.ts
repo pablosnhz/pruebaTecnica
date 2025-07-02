@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Signal } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/core/services/auth/auth.service';
@@ -9,6 +9,8 @@ import { AuthService } from 'src/app/core/services/auth/auth.service';
   styleUrls: ['./login.component.sass'],
 })
 export class LoginComponent {
+  $loading: Signal<boolean> = this.authService.$loading;
+
   form: FormGroup;
   errorMensaje = '';
 
@@ -42,5 +44,10 @@ export class LoginComponent {
         this.errorMensaje = 'Correo o contraseña incorrectos';
       },
     });
+  }
+
+  accederComoInvitado() {
+    localStorage.setItem('modoInvitado', 'true');
+    this.router.navigate(['/dashboard']);
   }
 }

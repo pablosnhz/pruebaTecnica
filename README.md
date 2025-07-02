@@ -52,7 +52,7 @@ cd frontend
 npm install
 ng serve
 
-![Login](./frontend/src/assets/allyUno.jpg)
-![Register](./frontend/src/assets/allyDos.jpg)
-![Dashboard](./frontend/src/assets/allyTres.jpg)
-![Users](./frontend/src/assets/allyCuatro.png)
+![Login](./frontend/src/assets/pruebaUno.webp)
+![Register](./frontend/src/assets/pruebaDos.webp)
+![Dashboard](./frontend/src/assets/pruebaTres.webp)
+![Users](./frontend/src/assets/pruebaCuatro.webp)

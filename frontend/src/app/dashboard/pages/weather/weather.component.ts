@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, signal, Signal } from '@angular/core';
 import { Iweather } from 'src/app/core/models/Iweather';
 import { WeatherService } from 'src/app/core/services/weather/weather.service';
 
@@ -11,6 +11,7 @@ export class WeatherComponent implements OnInit {
   weatherData!: Iweather;
   loading: boolean = true;
   seleccionado: boolean = false;
+  $loading: Signal<boolean> = signal(false);
 
   constructor(private weatherService: WeatherService) {}
 
@@ -43,7 +44,6 @@ export class WeatherComponent implements OnInit {
   }
 
   getClima(country: string): void {
-    this.loading = true;
     this.weatherService.weatherApiData(country).subscribe({
       next: (data) => {
         this.weatherData = data;
@@ -52,7 +52,6 @@ export class WeatherComponent implements OnInit {
       },
       error: (error) => {
         console.error('error clima', error);
-        this.loading = false;
       },
     });
   }
