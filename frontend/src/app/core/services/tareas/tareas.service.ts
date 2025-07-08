@@ -8,7 +8,7 @@ import { ITasks } from '../../models/ITasks';
   providedIn: 'root',
 })
 export class TareasService {
-  private readonly apiTask = `${environment.tasksApi}/tasks`;
+  private readonly apiTask = `${environment.apiBaseUrl}/tasks`;
 
   constructor(private http: HttpClient) {}
 

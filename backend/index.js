@@ -8,7 +8,12 @@ const authRoutes = require("./apiLogin/auth.routes");
 
 require("dotenv").config();
 
-app.use(cors());
+app.use(
+  cors({
+    origin: "https://pruebatek.netlify.app",
+    credentials: true,
+  })
+);
 app.use(express.json());
 
 app.use("/api/tasks", taskRoutes);

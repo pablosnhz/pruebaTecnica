@@ -17,13 +17,13 @@ export class AuthService {
   }
 
   getUsuarios(): Observable<any> {
-    return this.http.get<any>(`${environment.authApi}/getUsers`);
+    return this.http.get(`${environment.apiBaseUrl}/auth/getUsers`);
   }
 
   login(email: string, password: string) {
     this.$loading.set(true);
     return this.http
-      .post(`${environment.authApi}/login`, { email, password })
+      .post(`${environment.apiBaseUrl}/auth/login`, { email, password })
       .pipe(
         tap((response: any) => {
           if (response.user) {
@@ -42,7 +42,7 @@ export class AuthService {
   }) {
     this.$loading.set(true);
     return this.http
-      .post(`${environment.authApi}/register`, user)
+      .post(`${environment.apiBaseUrl}/auth/register`, user)
       .pipe(finalize(() => this.$loading.set(false)));
   }
 
@@ -58,14 +58,16 @@ export class AuthService {
 
   logout(): void {
     const userId = this.$user()?.id;
-    this.http.post(`${environment.authApi}/logout`, { id: userId }).subscribe({
-      next: () => {
-        this.$user.set(null);
-        sessionStorage.removeItem('tokenAlly');
-        sessionStorage.removeItem('nameLast');
-        this.router.navigate(['/']);
-      },
-      error: (err) => console.error('Error al registrar logout', err),
-    });
+    this.http
+      .post(`${environment.apiBaseUrl}/auth/logout`, { id: userId })
+      .subscribe({
+        next: () => {
+          this.$user.set(null);
+          sessionStorage.removeItem('tokenAlly');
+          sessionStorage.removeItem('nameLast');
+          this.router.navigate(['/']);
+        },
+        error: (err) => console.error('Error al registrar logout', err),
+      });
   }
 }
