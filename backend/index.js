@@ -10,8 +10,7 @@ require("dotenv").config();
 
 app.use(
   cors({
-    origin: ["https://pruebatek.netlify.app"],
-    credentials: true,
+    origin: ["https://pruebatek.netlify.app", "http://localhost:4200"],
   })
 );
 app.use(express.json());
