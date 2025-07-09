@@ -58,6 +58,12 @@
       <div *ngIf="errorMensaje" class="text-red-500 text-sm mt-1">
         {{ errorMensaje }}
       </div>
+      <div
+        *ngIf="$loadingForRender()"
+        class="text-gray-500 text-sm mt-2 text-center"
+      >
+        {{ $loadingForRender() }}
+      </div>
 
       <ng-template #loadingContent>
         <button

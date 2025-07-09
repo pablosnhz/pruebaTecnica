@@ -11,6 +11,7 @@ import { environment } from 'src/environments/environment.development';
 export class AuthService {
   $user: WritableSignal<any> = signal(null);
   $loading: WritableSignal<boolean> = signal(false);
+  $loadingForRender: WritableSignal<string> = signal('');
 
   constructor(private http: HttpClient, private router: Router) {
     this.restoreUser();
@@ -48,7 +49,7 @@ export class AuthService {
 
   // recuperamos el token para que persista
   restoreUser() {
-    const token = sessionStorage.getItem('tokenAlly');
+    const token = sessionStorage.getItem('tokenUser');
 
     if (token) {
       const user = { token };
@@ -63,7 +64,7 @@ export class AuthService {
       .subscribe({
         next: () => {
           this.$user.set(null);
-          sessionStorage.removeItem('tokenAlly');
+          sessionStorage.removeItem('tokenUser');
           sessionStorage.removeItem('nameLast');
           this.router.navigate(['/']);
         },

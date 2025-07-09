@@ -1,3 +1,5 @@
+const jwt = require("jsonwebtoken");
+
 const pool = require("../db/connection");
 const bcrypt = require("bcryptjs");
 
@@ -65,6 +67,14 @@ const login = async (req, res) => {
 
     const user = result.rows[0];
 
+    const token = jwt.sign(
+      { id: user.id, email: user.email },
+      process.env.JWT_SECRET,
+      {
+        expiresIn: "1h",
+      }
+    );
+
     const passwordMatch = await bcrypt.compare(password, user.password);
     if (!passwordMatch) {
       return res.status(401).json({ message: "credenciales invalidas" });
@@ -83,6 +93,7 @@ const login = async (req, res) => {
         nameLast: user.nameLast,
         email: user.email,
         ultimo_login: now,
+        token,
       },
     });
   } catch (err) {
