@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { ITasks } from 'src/app/core/models/ITasks';
 import { TareasService } from 'src/app/core/services/tareas/tareas.service';
 
@@ -8,7 +8,7 @@ import { TareasService } from 'src/app/core/services/tareas/tareas.service';
   styleUrls: ['./tasks.component.scss'],
 })
 export class TasksComponent {
-  constructor(private taskService: TareasService) {}
+  private taskService = inject(TareasService);
 
   dataTasks: ITasks[] = [];
   newTaskTitle = '';
