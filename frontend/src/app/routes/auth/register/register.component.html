@@ -22,11 +22,12 @@
           placeholder="Ingresa tu nombre completo"
           class="w-full px-3 dark:bg-white py-2 rounded-md border border-gray-300 dark:border-gray-700 focus:outline-none focus:ring-1 focus:ring-blue-500"
         />
-        <div
-          *ngIf="form.get('nameLast')?.touched && form.get('nameLast')?.errors?.['minlength'] && form.get('nameLast')?.errors?.['minlength']"
-          class="text-red-500 text-sm"
-        >
-          El Nombre debe tener al menos 13 caracteres.
+
+        <div class="text-red-500 text-sm">
+          @if (form.get('nameLast')?.touched &&
+          form.get('nameLast')?.errors?.['minlength'] &&
+          form.get('nameLast')?.errors?.['minlength']) { El Nombre debe tener al
+          menos 13 caracteres. }
         </div>
       </div>
 
@@ -65,11 +66,9 @@
           />
         </div>
       </div>
-      <div
-        *ngIf="form.errors?.['passwordMismatch'] && form.dirty"
-        class="text-red-500 text-sm"
-      >
-        Las contraseñas no coinciden
+      <div class="text-red-500 text-sm">
+        @if (form.errors?.['passwordMismatch'] && form.dirty) { Las contraseñas
+        no coinciden }
       </div>
 
       <div class="flex items-start flex-col justify-start">
@@ -85,31 +84,30 @@
           placeholder="Email"
           class="w-full px-3 dark:bg-white py-2 rounded-md border border-gray-300 dark:border-gray-700"
         />
-        <div
-          *ngIf="form.get('email')?.touched && form.get('email')?.errors"
-          class="text-red-500 text-sm"
-        >
-          Este campo debe ser un correo valido
+        <div class="text-red-500 text-sm">
+          @if (form.get('email')?.touched && form.get('email')?.errors) { Este
+          campo debe ser un correo valido }
         </div>
       </div>
+      @if (!$loading()) {
       <button
         type="submit"
         class="rounded-mt-3 bg-[#006eff] hover:bg-blue-600 text-white font-medium py-2 px-4 mt-6 rounded-md shadow-sm"
-        *ngIf="!$loading(); else loadingContent"
       >
         Registrarse
       </button>
-      <div *ngIf="errorMessage" class="text-red-500 text-sm mt-1">
+      } @else {
+      <button
+        class="hover:text-[#000000] rounded-mt-3 bg-[#FFFFFF] rounded-lg text-sm px-6 py-2.5 mb-2"
+      >
+        <app-spinner></app-spinner>
+      </button>
+      }
+      <div class="text-red-500 text-sm mt-1">
+        @if (errorMessage) {
         {{ errorMessage }}
+        }
       </div>
-
-      <ng-template #loadingContent>
-        <button
-          class="hover:text-[#000000] rounded-mt-3 bg-[#FFFFFF] rounded-lg text-sm px-6 py-2.5 mb-2"
-        >
-          <app-spinner></app-spinner>
-        </button>
-      </ng-template>
     </form>
 
     <div class="mt-4 text-center">

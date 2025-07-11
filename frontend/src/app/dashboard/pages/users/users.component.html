@@ -1,10 +1,10 @@
 <p class="text-2xl mb-2">Usuarios</p>
-<div *ngIf="!$user()">
-  <p class="mb-4">
-    Esta seccion se actualizo para hacer uso de Middleware y auth con JWT, si
-    deseas ver los datos necesitas iniciar sesion.
-  </p>
-</div>
+@if (!$user()) {
+<p class="mb-4">
+  Esta seccion se actualizo para hacer uso de Middleware y auth con JWT, si
+  deseas ver los datos necesitas iniciar sesion.
+</p>
+}
 
 <div class="relative overflow-x-auto justify-center items-center flex">
   <div class="rounded-lg shadow-xl overflow-hidden border">
@@ -24,9 +24,9 @@
       />
     </div>
     <table
-      *ngIf="data"
       class="text-sm text-left rounded-lg rtl:text-right text-dark border shadow-xl"
     >
+      @if (data) {
       <thead class="text-xs text-dark uppercase">
         <tr class="border-b text-dark dark:border-gray-300">
           <th scope="col" class="px-10 py-3">Nombre</th>
@@ -37,10 +37,8 @@
       </thead>
 
       <tbody>
-        <tr
-          *ngFor="let user of data"
-          class="border-b text-dark dark:border-gray-300"
-        >
+        @for (user of data; track user.id) {
+        <tr class="border-b text-dark dark:border-gray-300">
           <td class="px-10 py-4">{{ user.namelast }}</td>
           <td class="px-10 py-4">{{ user.email }}</td>
           <td class="px-10 py-4">
@@ -50,7 +48,9 @@
             {{ user.ultimo_logout | date : "dd/MM/yyyy HH:mm:ss" }}
           </td>
         </tr>
+        }
       </tbody>
+      }
     </table>
   </div>
 </div>

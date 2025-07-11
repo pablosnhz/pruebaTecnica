@@ -1,4 +1,6 @@
+import { CommonModule } from '@angular/common';
 import { Component, inject } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import { ITasks } from 'src/app/core/models/ITasks';
 import { TareasService } from 'src/app/core/services/tareas/tareas.service';
 
@@ -6,6 +8,8 @@ import { TareasService } from 'src/app/core/services/tareas/tareas.service';
   selector: 'app-tasks',
   templateUrl: './tasks.component.html',
   styleUrls: ['./tasks.component.scss'],
+  standalone: true,
+  imports: [CommonModule, FormsModule],
 })
 export class TasksComponent {
   private taskService = inject(TareasService);

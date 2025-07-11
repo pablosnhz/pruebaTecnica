@@ -1,5 +1,6 @@
+import { CommonModule, DatePipe } from '@angular/common';
 import { Component, inject, OnInit, Signal } from '@angular/core';
-import { FormControl } from '@angular/forms';
+import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import {
   filter,
   debounceTime,
@@ -14,6 +15,8 @@ import { AuthService } from 'src/app/core/services/auth/auth.service';
   selector: 'app-users',
   templateUrl: './users.component.html',
   styleUrls: ['./users.component.scss'],
+  standalone: true,
+  imports: [DatePipe, ReactiveFormsModule, CommonModule],
 })
 export class UsersComponent implements OnInit {
   private authService = inject(AuthService);
