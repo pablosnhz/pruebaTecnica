@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Signal } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import {
   filter,
@@ -16,6 +16,7 @@ import { AuthService } from 'src/app/core/services/auth/auth.service';
   styleUrls: ['./users.component.scss'],
 })
 export class UsersComponent implements OnInit {
+  $user: Signal<boolean> = this.authService.$user;
   constructor(private authService: AuthService) {}
 
   searchControl = new FormControl('');

@@ -1,4 +1,10 @@
-<p class="text-2xl mb-6">Usuarios</p>
+<p class="text-2xl mb-2">Usuarios</p>
+<div *ngIf="!$user()">
+  <p class="mb-4">
+    Esta seccion se actualizo para hacer uso de Middleware y auth con JWT, si
+    deseas ver los datos necesitas iniciar sesion.
+  </p>
+</div>
 
 <div class="relative overflow-x-auto justify-center items-center flex">
   <div class="rounded-lg shadow-xl overflow-hidden border">

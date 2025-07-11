@@ -24,7 +24,15 @@
     *ngFor="let item of dataTasks"
     class="p-4 border rounded-lg shadow-xl bg-white"
   >
-    <p class="text-xl font-semibold mb-2">Tarea #{{ item.id }}</p>
+    <div class="flex justify-between">
+      <p class="text-xl font-semibold mb-2">Tarea #{{ item.id }}</p>
+      <button
+        (click)="deleteTask(item.id)"
+        class="bg-red-600 text-white text-xs px-2 h-6 leading-none rounded"
+      >
+        X
+      </button>
+    </div>
 
     <p class="mb-2"><strong>Título:</strong> {{ item.titulo }}</p>
 
@@ -37,13 +45,6 @@
       class="bg-yellow-500 text-white px-2 py-1 rounded mr-2"
     >
       {{ item.completada ? "Marcar como pendiente" : "Marcar como completada" }}
-    </button>
-
-    <button
-      (click)="deleteTask(item.id)"
-      class="bg-red-600 text-white px-3 py-1 rounded"
-    >
-      X
     </button>
   </div>
 </div>
