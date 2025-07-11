@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable, signal, WritableSignal } from '@angular/core';
+import { inject, Injectable, signal, WritableSignal } from '@angular/core';
 import { Router } from '@angular/router';
 import { finalize, Observable } from 'rxjs';
 import { tap } from 'rxjs/internal/operators/tap';
@@ -9,11 +9,14 @@ import { environment } from 'src/environments/environment.development';
   providedIn: 'root',
 })
 export class AuthService {
+  private http = inject(HttpClient);
+  private router = inject(Router);
+
   $user: WritableSignal<any> = signal(null);
   $loading: WritableSignal<boolean> = signal(false);
   $loadingForRender: WritableSignal<string> = signal('');
 
-  constructor(private http: HttpClient, private router: Router) {
+  constructor() {
     this.restoreUser();
   }
 

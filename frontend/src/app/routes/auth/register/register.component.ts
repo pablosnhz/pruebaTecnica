@@ -1,4 +1,4 @@
-import { Component, Signal } from '@angular/core';
+import { Component, inject, Signal } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/core/services/auth/auth.service';
@@ -9,26 +9,23 @@ import { AuthService } from 'src/app/core/services/auth/auth.service';
   styleUrls: ['./register.component.sass'],
 })
 export class RegisterComponent {
-  errorMessage = '';
+  private fb = inject(FormBuilder);
+  private authService = inject(AuthService);
+  private router = inject(Router);
+
   $loading: Signal<boolean> = this.authService.$loading;
 
-  form: FormGroup;
+  form: FormGroup = this.fb.group(
+    {
+      nameLast: ['', [Validators.required, Validators.minLength(10)]],
+      email: ['', [Validators.required, Validators.email]],
+      password: ['', Validators.required],
+      confirmPassword: ['', Validators.required],
+    },
+    { validator: this.validatorPassword }
+  );
 
-  constructor(
-    private fb: FormBuilder,
-    private authService: AuthService,
-    private router: Router
-  ) {
-    this.form = fb.group(
-      {
-        nameLast: ['', [Validators.required, Validators.minLength(10)]],
-        email: ['', [Validators.required, Validators.email]],
-        password: ['', Validators.required],
-        confirmPassword: ['', Validators.required],
-      },
-      { validator: this.validatorPassword }
-    );
-  }
+  errorMessage = '';
 
   validatorPassword(form: FormGroup) {
     const password = form.get('password')?.value;

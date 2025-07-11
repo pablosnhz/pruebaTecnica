@@ -1,4 +1,4 @@
-import { Component, OnInit, signal, Signal } from '@angular/core';
+import { Component, inject, OnInit, signal, Signal } from '@angular/core';
 import { Iweather } from 'src/app/core/models/Iweather';
 import { WeatherService } from 'src/app/core/services/weather/weather.service';
 
@@ -8,12 +8,12 @@ import { WeatherService } from 'src/app/core/services/weather/weather.service';
   styleUrls: ['./weather.component.scss'],
 })
 export class WeatherComponent implements OnInit {
+  private weatherService = inject(WeatherService);
+
   weatherData!: Iweather;
   loading: boolean = true;
   seleccionado: boolean = false;
   $loading: Signal<boolean> = signal(false);
-
-  constructor(private weatherService: WeatherService) {}
 
   ngOnInit(): void {
     this.onSelectCountry(this.selectedCountry);

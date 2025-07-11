@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment.development';
 import { ITasks } from '../../models/ITasks';
@@ -8,9 +8,9 @@ import { ITasks } from '../../models/ITasks';
   providedIn: 'root',
 })
 export class TareasService {
-  private readonly apiTask = `${environment.apiBaseUrl}/tasks`;
+  private http = inject(HttpClient);
 
-  constructor(private http: HttpClient) {}
+  private readonly apiTask = `${environment.apiBaseUrl}/tasks`;
 
   tasksApi(): Observable<ITasks[]> {
     return this.http.get<ITasks[]>(this.apiTask);

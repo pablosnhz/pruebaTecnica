@@ -1,4 +1,4 @@
-import { Component, OnInit, Signal } from '@angular/core';
+import { Component, inject, OnInit, Signal } from '@angular/core';
 import { AuthService } from 'src/app/core/services/auth/auth.service';
 
 @Component({
@@ -7,7 +7,7 @@ import { AuthService } from 'src/app/core/services/auth/auth.service';
   styleUrls: ['./top-bar.component.scss'],
 })
 export class TopBarComponent implements OnInit {
-  constructor(private authService: AuthService) {}
+  private authService = inject(AuthService);
 
   ngOnInit(): void {}
 

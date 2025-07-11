@@ -1,4 +1,4 @@
-import { Component, Signal, WritableSignal } from '@angular/core';
+import { Component, inject, Signal, WritableSignal } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/core/services/auth/auth.service';
@@ -9,27 +9,24 @@ import { AuthService } from 'src/app/core/services/auth/auth.service';
   styleUrls: ['./login.component.sass'],
 })
 export class LoginComponent {
+  private authService = inject(AuthService);
+  private router = inject(Router);
+  private fb = inject(FormBuilder);
+
   $loading: Signal<boolean> = this.authService.$loading;
   $loadingForRender: WritableSignal<string> =
     this.authService.$loadingForRender;
 
-  form: FormGroup;
-  errorMensaje = '';
+  form: FormGroup = this.fb.group({
+    email: ['', [Validators.required, Validators.email]],
+    password: ['', Validators.required],
+  });
 
-  constructor(
-    private router: Router,
-    private fb: FormBuilder,
-    private authService: AuthService
-  ) {
-    this.form = fb.group({
-      email: ['', [Validators.required, Validators.email]],
-      password: ['', Validators.required],
-    });
-  }
+  errorMensaje = '';
 
   submitLogin(): void {
     if (!this.form.valid) {
-      this.errorMensaje = 'completa todos los campos';
+      this.errorMensaje = 'Completa todos los campos';
       return;
     }
 
