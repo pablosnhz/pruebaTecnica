@@ -5,13 +5,13 @@ export const routes: Routes = [
   {
     path: '',
     loadChildren: () =>
-      import('./../app/routes/auth/auth.module').then((a) => a.AuthModule),
+      import('./../app/routes/auth/auth.routes').then((a) => a.AUTH_ROUTES),
   },
   {
     path: 'dashboard',
     canActivate: [notUserGuard],
     loadChildren: () =>
-      import('./dashboard/dashboard.module').then((d) => d.DashboardModule),
+      import('./dashboard/dashboard.routes').then((d) => d.DASHBOARD_ROUTES),
   },
   { path: '**', redirectTo: '', pathMatch: 'full' },
 ];

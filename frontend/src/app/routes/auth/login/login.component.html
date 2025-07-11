@@ -25,11 +25,9 @@
           placeholder="Email"
           class="w-full px-3 dark:bg-white py-2 rounded-md border border-gray-300 dark:border-gray-700 focus:outline-none focus:ring-1 focus:ring-blue-500"
         />
-        <div
-          *ngIf="form.get('email')?.touched && form.get('email')?.errors"
-          class="text-red-500 text-sm"
-        >
-          Este campo debe ser un correo valido
+        <div class="text-red-500 text-sm">
+          @if (form.get('email')?.touched && form.get('email')?.errors) { Este
+          campo debe ser un correo valido }
         </div>
       </div>
 
@@ -48,30 +46,30 @@
         />
       </div>
 
+      @if (!$loading()) {
       <button
         type="submit"
         class="rounded-mt-3 bg-[#006eff] hover:bg-blue-600 text-white font-medium py-2 px-4 mt-6 rounded-md shadow-sm"
-        *ngIf="!$loading(); else loadingContent"
       >
         Acceder
       </button>
-      <div *ngIf="errorMensaje" class="text-red-500 text-sm mt-1">
-        {{ errorMensaje }}
-      </div>
-      <div
-        *ngIf="$loadingForRender()"
-        class="text-gray-500 text-sm mt-2 text-center"
+      } @else {
+      <button
+        class="hover:text-[#000000] rounded-mt-3 bg-[#FFFFFF] rounded-lg text-sm px-6 py-2.5 mb-2"
       >
-        {{ $loadingForRender() }}
+        <app-spinner></app-spinner>
+      </button>
+      }
+      <div class="text-red-500 text-sm mt-1">
+        @if (errorMensaje) {
+        {{ errorMensaje }}
+        }
       </div>
-
-      <ng-template #loadingContent>
-        <button
-          class="hover:text-[#000000] rounded-mt-3 bg-[#FFFFFF] rounded-lg text-sm px-6 py-2.5 mb-2"
-        >
-          <app-spinner></app-spinner>
-        </button>
-      </ng-template>
+      <div class="text-gray-500 text-sm mt-2 text-center">
+        @if ($loadingForRender()) {
+        {{ $loadingForRender() }}
+        }
+      </div>
     </form>
 
     <div class="mt-4 text-center">

@@ -11,7 +11,8 @@
       <hr class="border-t border-gray-300 my-2" />
     </div>
     <div class="px-3 flex flex-col gap-2">
-      <div *ngFor="let country of ciudadSeleccionada | keyvalue">
+      @for (country of ciudadSeleccionada | keyvalue; track country) {
+      <div>
         <button
           (click)="onSelectCountry(country.key)"
           [class.selected]="country.key === selectedCountry"
@@ -20,6 +21,7 @@
           {{ country.key }}
         </button>
       </div>
+      }
     </div>
   </div>
 
@@ -40,7 +42,8 @@
       <hr class="border-t border-gray-300 my-2" />
     </div>
     <div class="px-3 flex items-center gap-4">
-      <div *ngIf="weatherData" class="flex items-center gap-4">
+      <div class="flex items-center gap-4">
+        @if (weatherData) {
         <img
           [src]="weatherData.current.condition.icon"
           alt="weather-icon"
@@ -54,6 +57,7 @@
             <strong>Condición:</strong> {{ weatherData.current.condition.text }}
           </p>
         </div>
+        }
       </div>
     </div>
   </div>
@@ -64,12 +68,13 @@
       <hr class="border-t border-gray-300 my-2" />
     </div>
     <div class="px-3 flex flex-col gap-2">
-      <div *ngIf="weatherData">
-        <p>
-          <strong>Hora actual: </strong
-          >{{ weatherData.location.localtime | date : "HH:mm:ss" }}
-        </p>
-      </div>
+      @if (weatherData) {
+      <p>
+        <strong>Hora actual: </strong
+        >{{ weatherData.location.localtime | date : "HH:mm:ss" }}
+      </p>
+
+      }
     </div>
   </div>
 
@@ -79,11 +84,13 @@
       <hr class="border-t border-gray-300 my-2" />
     </div>
     <div class="px-3 flex flex-col gap-2">
-      <div *ngFor="let city of cities">
+      @for (city of cities; track city) {
+      <div>
         <button (click)="onSelectCity(city)">
           {{ city }}
         </button>
       </div>
+      }
     </div>
   </div>
 </div>

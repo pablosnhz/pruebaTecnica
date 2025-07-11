@@ -1,11 +1,16 @@
+import { CommonModule } from '@angular/common';
 import { Component, inject, OnInit, signal, Signal } from '@angular/core';
 import { Iweather } from 'src/app/core/models/Iweather';
 import { WeatherService } from 'src/app/core/services/weather/weather.service';
+import { TasksComponent } from '../tasks/tasks.component';
+import { UsersComponent } from '../users/users.component';
 
 @Component({
   selector: 'app-weather',
   templateUrl: './weather.component.html',
   styleUrls: ['./weather.component.scss'],
+  standalone: true,
+  imports: [CommonModule, TasksComponent],
 })
 export class WeatherComponent implements OnInit {
   private weatherService = inject(WeatherService);

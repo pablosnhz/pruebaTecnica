@@ -5,6 +5,8 @@ import { AuthService } from 'src/app/core/services/auth/auth.service';
   selector: 'app-top-bar',
   templateUrl: './top-bar.component.html',
   styleUrls: ['./top-bar.component.scss'],
+  standalone: true,
+  imports: [],
 })
 export class TopBarComponent implements OnInit {
   private authService = inject(AuthService);

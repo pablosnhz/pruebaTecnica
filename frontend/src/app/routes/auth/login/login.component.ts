@@ -1,12 +1,21 @@
+import { CommonModule } from '@angular/common';
 import { Component, inject, Signal, WritableSignal } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import {
+  FormBuilder,
+  FormGroup,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
+import { Router, RouterLink } from '@angular/router';
 import { AuthService } from 'src/app/core/services/auth/auth.service';
+import { SpinnerComponent } from 'src/app/shared/spinner/spinner.component';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.sass'],
+  standalone: true,
+  imports: [CommonModule, ReactiveFormsModule, SpinnerComponent, RouterLink],
 })
 export class LoginComponent {
   private authService = inject(AuthService);
